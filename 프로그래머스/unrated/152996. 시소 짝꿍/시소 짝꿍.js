@@ -1,10 +1,12 @@
 function solution(weights) {
     var answer = 0;
-    let pairRates = [1, 1/2, 2, 3/2, 2/3, 4/3, 3/4];
+    let pairRates = [1, 2, 3/2, 4/3];
     
     let visited = {};
     
-    for (let current of weights) {
+    let w = weights.sort((a,b)=> b - a);
+    
+    for (let current of w) {
         pairRates.forEach((rate) => {
             if (visited[current * rate]) {
                 answer += visited[current * rate];
