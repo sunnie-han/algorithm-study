@@ -1,31 +1,27 @@
 function solution(sequence, k) {
     const length = sequence.length
-
-    let minLength = length
-    let answer = []
-    let endIndex = length - 1
-    let currentSum = 0
+    let answer = [0, length]
+    let left = 0
+    let right = 0
+    let sum = sequence[left]
     
-    for (let i = length - 1; i >= 0; i--) {
-        currentSum += sequence[i]
-        if (currentSum > k) {
-            let lastIndex = endIndex
-            while (lastIndex > i) {
-                currentSum -= sequence[lastIndex]
-                lastIndex--
-                if (currentSum < k) break
+    while (right < length) {
+        if (sum < k) {
+            right++
+            sum += sequence[right]
+        } else if (sum > k) {
+            sum -= sequence[left]
+            left++
+        } else {
+            const minDist = answer[1] - answer[0]
+            const currentDist = right - left
+            if (currentDist < minDist) {
+                answer = [left, right]
             }
-            endIndex = lastIndex
-        }
-        if (currentSum === k) {
-            const curLength = endIndex - i + 1
-            if (minLength >= curLength) {
-                answer = [i, endIndex]
-                minLength = curLength
-            }
+            sum -= sequence[left]
+            left++
         }
     }
-    
     
     return answer
 }
