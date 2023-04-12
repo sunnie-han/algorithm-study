@@ -5,19 +5,16 @@ const toMin = (timeString) => {
 
 const addCleanTime = (min) => min + 10
 
-const getObjectLength = (object) => Object.keys(object).length
-
 function solution(book_time) {
     const bookings = book_time.map(val => [toMin(val[0]), toMin(val[1])])
     bookings.sort((a, b) => a[0] - b[0] || a[1] - b[1])
-    // console.log(bookings)
     
-    const rooms = {}
+    const rooms = []
     for (let booking of bookings) {
         const [start, end] = booking
         
-        let roomNo = getObjectLength(rooms)
-        for (let i = 0; i < getObjectLength(rooms); i++) {
+        let roomNo = rooms.length
+        for (let i = 0; i < rooms.length; i++) {
             const availableTime = rooms[i]
             if (availableTime <= start) {
                 roomNo = i
@@ -27,5 +24,5 @@ function solution(book_time) {
         
         rooms[roomNo] = addCleanTime(end)
     }
-    return getObjectLength(rooms)
+    return rooms.length
 }
