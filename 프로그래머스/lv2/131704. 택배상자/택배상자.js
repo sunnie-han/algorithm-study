@@ -6,7 +6,7 @@ function solution(orders) {
         const isInConveyor = order === conveyorOrder
         const isInSubConveyor = order === subConveyor[subConveyor.length - 1]
         const isLoadable = isInConveyor || isInSubConveyor
-        if (isInSubConveyor) {
+        if (isLoadable) {
             if (isInSubConveyor) {
                 subConveyor.pop()
             } else {
