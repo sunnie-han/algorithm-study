@@ -3,15 +3,9 @@ function solution(orders) {
     let conveyorOrder = 1
     const subConveyor = []
     for (const order of orders) {
-        const isInConveyor = order === conveyorOrder
         const isInSubConveyor = order === subConveyor[subConveyor.length - 1]
-        const isLoadable = isInConveyor || isInSubConveyor
-        if (isLoadable) {
-            if (isInSubConveyor) {
-                subConveyor.pop()
-            } else {
-                conveyorOrder++
-            }
+        if (isInSubConveyor) {
+            subConveyor.pop()
             answer++
         } else {
             while (conveyorOrder < order) {
